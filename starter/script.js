@@ -17,14 +17,11 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 if(navigator.geolocation) {
  navigator.geolocation.getCurrentPosition(function(position){
- console.log(position);
 
  //WORKING TO GET A PRESENT POSITION
  const {latitude} =position.coords
  // const latitude = position.coords.latitude
  const {longitude} = position.coords; 
- console.log(latitude, longitude)
- // console.log(`https://www.google.com/maps/@${9.060352},${7.4678272},13z?entry=ttu`)
 
  // how to display a map using a third party libariry called LeafLet
 
@@ -34,15 +31,25 @@ if(navigator.geolocation) {
 
  //TILELAYER
  L.tileLayer(
-  'https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+  'https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', 
   {
    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  // MARKER
-  const marker = L.marker(coords).addTo(map);
-  marker.bindPopup('A Pretty').openPopup()
-}, function(){
+  
+
+  // DISPLAYING A MAP MARKER
+  map.on('click', function(mapEvent){
+   console.log(mapEvent)
+
+   const {lat, lng} = mapEvent.latlng;
+
+   // MARKER
+  const marker = L.marker([lat, lng]).addTo(map);
+  marker.bindPopup('Workout').openPopup();
+  })
+}, 
+function(){
  alert("Can't have access to location")
 })
 }
