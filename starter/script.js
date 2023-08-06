@@ -17,7 +17,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 if(navigator.geolocation) {
  navigator.geolocation.getCurrentPosition(function(position){
-
+  console.log(position)
  //WORKING TO GET A PRESENT POSITION
  const {latitude} =position.coords
  // const latitude = position.coords.latitude
@@ -36,6 +36,8 @@ if(navigator.geolocation) {
    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
+  // const marker = L.marker(coords).addTo(map);
+  // marker.bindPopup()
   
 
   // DISPLAYING A MAP MARKER
@@ -45,8 +47,18 @@ if(navigator.geolocation) {
    const {lat, lng} = mapEvent.latlng;
 
    // MARKER
-  const marker = L.marker([lat, lng]).addTo(map);
-  marker.bindPopup('Workout').openPopup();
+   const marker = L.marker([lat, lng]).addTo(map);
+   marker.bindPopup(
+    L.popup({
+     maxWidth: 250,
+     minWidth: 100,
+     autoClose: false,
+     closeOnClick: false,
+     className: 'running-popup'
+    })
+   )
+   .setPopupContent('Workout')
+   .openPopup();
   })
 }, 
 function(){
