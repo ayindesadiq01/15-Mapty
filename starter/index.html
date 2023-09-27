@@ -29,7 +29,7 @@
           <div class="form__row">
             <label class="form__label">Type</label>
             <select class="form__input form__input--type">
-              <option value="running">Running</option>
+              <option value="running" class="running">Running</option>
               <option value="cycling">Cycling</option>
             </select>
           </div>
@@ -44,14 +44,16 @@
               placeholder="min"
             />
           </div>
-          <div class="form__row">
+
+
+          <div class="form__row cad">
             <label class="form__label">Cadence</label>
             <input
               class="form__input form__input--cadence"
               placeholder="step/min"
             />
           </div>
-          <div class="form__row form__row--hidden">
+          <div class="form__row elevate form__row--hidden">
             <label class="form__label">Elev Gain</label>
             <input
               class="form__input form__input--elevation"
@@ -125,7 +127,7 @@
     <div id="map"></div>
     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
-      </script>
-    <script defer src="script.js"></script>
+    </script>
+    <script defer src="script.js"></script>h
   </body>
 </html>
