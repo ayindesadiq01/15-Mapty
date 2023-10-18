@@ -247,6 +247,11 @@ class App {
 
   _newWorkout(e) {
     e.preventDefault();
+    const validInputs = function(...inputs) {
+      inputs.every(inp => {
+        Number.isFinite(inp)
+      })
+    }
 
     //Get data from form
     const type = inputType.value;
@@ -260,12 +265,24 @@ class App {
 
       const cadence = +inputCadence.value;
       // Check if data provided is valid
-      if(!Number.isFinite(distance)) return alert('Inputs have to be positive numbers')
+      if(
+        // !Number.isFinite(distance) || 
+        // !Number.isFinite(duration) || 
+        // !Number.isFinite(cadence)
+        !validInputs(distance, duration, cadence)
+        ) return alert('Inputs have to be positive numbers')
     }
 
     // If workout cycling, create cycling object
     if(type === 'cycling') {
       const elGain = +inputElevation.value;
+
+      if(
+        // !Number.isFinite(distance) || 
+        // !Number.isFinite(duration) || 
+        // !Number.isFinite(cadence)
+        !validInputs(distance, duration, elGain)
+        ) return alert('Inputs have to be positive numbers')
     }
     // Clear input field
     inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = '';
@@ -295,3 +312,4 @@ const app = new App();
 const dat = new Date();
 const idd = `${new Date()}`.slice(-10)
 console.log(dat, idd, typeof idd)
+
