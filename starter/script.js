@@ -246,12 +246,12 @@ class App {
   }
 
   _newWorkout(e) {
+    const validInputs = (...inputs) => inputs.every(inp => Number.isFinite(inp));
+
+    const positiveInputs = (...inputs) => inputs.every(inp => inp > 0)
+
     e.preventDefault();
-    const validInputs = function(...inputs) {
-      inputs.every(inp => {
-        Number.isFinite(inp)
-      })
-    }
+
 
     //Get data from form
     const type = inputType.value;
@@ -262,27 +262,35 @@ class App {
 
     // If workout running, create running object
     if(type === 'running') {
-
       const cadence = +inputCadence.value;
       // Check if data provided is valid
-      if(
-        // !Number.isFinite(distance) || 
-        // !Number.isFinite(duration) || 
-        // !Number.isFinite(cadence)
-        !validInputs(distance, duration, cadence)
-        ) return alert('Inputs have to be positive numbers')
+      // if(
+      //   !Number.isFinite(distance) || 
+      //   !Number.isFinite(duration) || 
+      //   !Number.isFinite(cadence)
+      //   ) {
+      //     return alert('Inputs have to be positive numbers')
+      //   }
+      if(!validInputs(distance, duration, cadence)) return alert('Input must contain numbers')
+      
+      if(!positiveInputs(distance, duration, cadence)) return alert('Input must not be negative')
     }
 
     // If workout cycling, create cycling object
     if(type === 'cycling') {
       const elGain = +inputElevation.value;
 
-      if(
-        // !Number.isFinite(distance) || 
-        // !Number.isFinite(duration) || 
-        // !Number.isFinite(cadence)
-        !validInputs(distance, duration, elGain)
-        ) return alert('Inputs have to be positive numbers')
+      // if(
+      //   !Number.isFinite(distance) || 
+      //   !Number.isFinite(duration) || 
+      //   !Number.isFinite(elGain)
+      //   ) {
+      //     return alert('Inputs have to be positive numbers')
+      //   }
+
+      if(!validInputs(distance, duration, elGain)) return alert('Input must contain numbers')
+      
+      if(!positiveInputs(distance, duration)) return alert('Input must not be negative')
     }
     // Clear input field
     inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = '';
@@ -307,9 +315,3 @@ class App {
 
 const app = new App();
 // GEO LOCATION API
-
-
-const dat = new Date();
-const idd = `${new Date()}`.slice(-10)
-console.log(dat, idd, typeof idd)
-
